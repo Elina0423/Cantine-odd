@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaspillage Cantine - ODD 12</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; padding: 15px; background-color: #f1f8e9; color: #333; margin: 0; }
+        header { background-color: #2e7d32; color: white; padding: 20px; text-align: center; border-radius: 0 0 15px 15px; margin: -15px -15px 20px -15px; }
+        h1 { margin: 0; font-size: 1.5rem; }
+        .poubelle-card { background: white; padding: 15px; margin-bottom: 12px; border-radius: 10px; box-shadow: 0 3px 6px rgba(0,0,0,0.1); border-left: 5px solid #81c784; }
+        .poubelle-card h3 { margin: 0 0 10px 0; color: #1b5e20; }
+        .info-panel { background-color: #e8f5e9; padding: 15px; border-radius: 10px; margin-bottom: 20px; border: 1px solid #c8e6c9; }
+        input[type="number"] { width: 80px; padding: 5px; border: 1px solid #ccc; border-radius: 5px; font-size: 1rem; }
+        button { background-color: #2e7d32; color: white; border: none; padding: 10px 20px; border-radius: 5px; width: 100%; font-size: 1rem; font-weight: bold; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Stop au Gaspillage ! 🍏</h1>
+        <p>Collège du Vaucluse - 700 Demi-pensionnaires (ODD 12)</p>
+    </header>
+
+    <div class="info-panel">
+        <strong>Objectif :</strong> Mesurer le gaspillage quotidien pour agir. Remplissez les pesées après le service.
+    </div>
+
+    <!-- ZONE DE SAISIE -->
+    <div class="poubelle-card">
+        <h3>🗑️ 1. Déchets alimentaires</h3>
+        <label>Poids : <input type="number" placeholder="0" step="0.1"> kg</label>
+    </div>
+
+    <div class="poubelle-card">
+        <h3>🧻 2. Serviettes papier</h3>
+        <label>Poids : <input type="number" placeholder="0" step="0.1"> kg</label>
+    </div>
+
+    <div class="poubelle-card">
+        <h3>🥖 3. Le Pain</h3>
+        <label>Poids : <input type="number" placeholder="0" step="0.1"> kg</label>
+    </div>
+
+    <div class="poubelle-card">
+        <h3>📦 4. Emballages</h3>
+        <label>Poids : <input type="number" placeholder="0" step="0.1"> kg</label>
+    </div>
+
+    <div class="poubelle-card">
+        <h3>🍎 5. Fruits entamés</h3>
+        <label>Poids : <input type="number" placeholder="0" step="0.1"> kg</label>
+    </div>
+
+    <button onclick="alert('Bravo ! (Note : Pour enregistrer pour de vrai, il nous faudra l\'étape suivante avec Google Sheets)')">Enregistrer la pesée</button>
+
+</body>
+</html>
