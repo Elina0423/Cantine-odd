@@ -8,11 +8,13 @@
         body { font-family: 'Segoe UI', Arial, sans-serif; padding: 15px; background-color: #f1f8e9; color: #333; margin: 0; }
         header { background-color: #2e7d32; color: white; padding: 20px; text-align: center; border-radius: 0 0 15px 15px; margin: -15px -15px 20px -15px; }
         h1 { margin: 0; font-size: 1.5rem; }
+        form { max-width: 500px; margin: 0 auto; }
         .poubelle-card { background: white; padding: 15px; margin-bottom: 12px; border-radius: 10px; box-shadow: 0 3px 6px rgba(0,0,0,0.1); border-left: 5px solid #81c784; }
         .poubelle-card h3 { margin: 0 0 10px 0; color: #1b5e20; }
-        .info-panel { background-color: #e8f5e9; padding: 15px; border-radius: 10px; margin-bottom: 20px; border: 1px solid #c8e6c9; }
-        input[type="number"] { width: 80px; padding: 5px; border: 1px solid #ccc; border-radius: 5px; font-size: 1rem; }
-        button { background-color: #2e7d32; color: white; border: none; padding: 10px 20px; border-radius: 5px; width: 100%; font-size: 1rem; font-weight: bold; margin-top: 10px; }
+        .info-panel { background-color: #e8f5e9; padding: 15px; border-radius: 10px; margin-bottom: 20px; border: 1px solid #c8e6c9; text-align: center; }
+        input[type="number"], input[type="date"] { width: 100%; max-width: 120px; padding: 8px; border: 1px solid #ccc; border-radius: 5px; font-size: 1rem; box-sizing: border-box; }
+        button { background-color: #2e7d32; color: white; border: none; padding: 15px 20px; border-radius: 5px; width: 100%; font-size: 1.1rem; font-weight: bold; margin-top: 15px; cursor: pointer; box-shadow: 0 3px 5px rgba(0,0,0,0.2); }
+        button:active { background-color: #1b5e20; }
     </style>
 </head>
 <body>
@@ -23,36 +25,46 @@
     </header>
 
     <div class="info-panel">
-        <strong>Objectif :</strong> Mesurer le gaspillage quotidien pour agir. Remplissez les pesées après le service.
+        <strong>Objectif :</strong> Saisissez le poids des poubelles après le service pour calculer notre empreinte carbone.
     </div>
 
-    <!-- ZONE DE SAISIE -->
-    <div class="poubelle-card">
-        <h3>🗑️ 1. Déchets alimentaires</h3>
-        <label>Poids : <input type="number" placeholder="0" step="0.1"> kg</label>
-    </div>
+    <form action="https://formsubmit.co/VOTRE_EMAIL@GMAIL.COM" method="POST">
+        
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://github.com">
 
-    <div class="poubelle-card">
-        <h3>🧻 2. Serviettes papier</h3>
-        <label>Poids : <input type="number" placeholder="0" step="0.1"> kg</label>
-    </div>
+        <div class="poubelle-card">
+            <h3>📅 Date de la pesée</h3>
+            <input type="date" name="Date_Pesee" required>
+        </div>
 
-    <div class="poubelle-card">
-        <h3>🥖 3. Le Pain</h3>
-        <label>Poids : <input type="number" placeholder="0" step="0.1"> kg</label>
-    </div>
+        <div class="poubelle-card">
+            <h3>🗑️ 1. Déchets alimentaires</h3>
+            <label>Poids : <input type="number" name="1_Dechets_Alimentaires_kg" placeholder="0.0" step="0.1" required> kg</label>
+        </div>
 
-    <div class="poubelle-card">
-        <h3>📦 4. Emballages</h3>
-        <label>Poids : <input type="number" placeholder="0" step="0.1"> kg</label>
-    </div>
+        <div class="poubelle-card">
+            <h3>🧻 2. Serviettes papier</h3>
+            <label>Poids : <input type="number" name="2_Serviettes_Papier_kg" placeholder="0.0" step="0.1" required> kg</label>
+        </div>
 
-    <div class="poubelle-card">
-        <h3>🍎 5. Fruits entamés</h3>
-        <label>Poids : <input type="number" placeholder="0" step="0.1"> kg</label>
-    </div>
+        <div class="poubelle-card">
+            <h3>🥖 3. Le Pain</h3>
+            <label>Poids : <input type="number" name="3_Pain_kg" placeholder="0.0" step="0.1" required> kg</label>
+        </div>
 
-    <button onclick="alert('Bravo ! (Note : Pour enregistrer pour de vrai, il nous faudra l\'étape suivante avec Google Sheets)')">Enregistrer la pesée</button>
+        <div class="poubelle-card">
+            <h3>📦 4. Emballages</h3>
+            <label>Poids : <input type="number" name="4_Emballages_kg" placeholder="0.0" step="0.1" required> kg</label>
+        </div>
+
+        <div class="poubelle-card">
+            <h3>🍎 5. Fruits entamés</h3>
+            <label>Poids : <input type="number" name="5_Fruits_Entames_kg" placeholder="0.0" step="0.1" required> kg</label>
+        </div>
+
+        <button type="submit">Enregistrer la pesée</button>
+    </form>
 
 </body>
 </html>
