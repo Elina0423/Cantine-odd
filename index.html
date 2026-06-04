@@ -34,21 +34,21 @@
             text-align: center;
         }
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             font-weight: 600;
             color: #34495e;
         }
         input, select {
             width: 100%;
-            padding: 12px;
+            padding: 10px;
             border: 1px solid #bdc3c7;
             border-radius: 6px;
             box-sizing: border-box;
-            font-size: 16px;
+            font-size: 15px;
         }
         input:focus, select:focus {
             border-color: #2ecc71;
@@ -64,6 +64,7 @@
             font-weight: bold;
             cursor: pointer;
             width: 100%;
+            margin-top: 10px;
             transition: background 0.3s;
         }
         button:hover {
@@ -75,22 +76,59 @@
 
 <div class="container">
     <h2>Gaspillage Quotidien (ODD 12)</h2>
-    <p>Saisissez vos données pour alimenter directement le tableur de suivi.</p>
+    <p>Renseignez les informations pour mettre à jour le tableau de suivi.</p>
     
     <form id="gaspillageForm">
         <div class="form-group">
-            <label for="quantite">Quantité jetée (en grammes) :</label>
-            <input type="number" id="quantite" required placeholder="Ex: 250" min="1">
-        </div>
-        
-        <div class="form-group">
-            <label for="typeAliment">Type de nourriture / déchet :</label>
-            <select id="typeAliment">
-                <option value="Restes de repas">Restes de repas / Plats cuisinés</option>
-                <option value="Fruits et Légumes">Fruits et Légumes</option>
-                <option value="Pain et Féculents">Pain, Pâtes, Riz</option>
-                <option value="Produits laitiers et Viandes">Produits laitiers, Viandes, Poissons</option>
+            <label for="mois">Mois :</label>
+            <select id="mois">
+                <option value="Septembre">Septembre</option>
+                <option value="Octobre">Octobre</option>
+                <option value="Novembre">Novembre</option>
+                <option value="Décembre">Décembre</option>
+                <option value="Janvier">Janvier</option>
+                <option value="Février">Février</option>
+                <option value="Mars">Mars</option>
+                <option value="Avril">Avril</option>
+                <option value="Mai">Mai</option>
+                <option value="Juin">Juin</option>
             </select>
+        </div>
+
+        <div class="form-group">
+            <label for="jour">Jour de la semaine :</label>
+            <select id="jour">
+                <option value="Lundi">Lundi</option>
+                <option value="Mardi">Mardi</option>
+                <option value="Jeudi">Jeudi</option>
+                <option value="Vendredi">Vendredi</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="categorie">Catégorie de déchet :</label>
+            <select id="categorie">
+                <option value="Déchets alimentaires">Déchets alimentaires</option>
+                <option value="Emballages">Emballages</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="typeAliment">Type précis :</label>
+            <select id="typeAliment">
+                <option value="Viande rouge">Viande rouge</option>
+                <option value="Viande blanche">Viande blanche</option>
+                <option value="Poisson">Poisson</option>
+                <option value="Végétarien">Végétarien</option>
+                <option value="Pain">Pain</option>
+                <option value="Serviettes papier">Serviettes papier</option>
+                <option value="Fruits entamés">Fruits entamés</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="quantite">Quantité (en grammes ou unités) :</label>
+            <input type="number" id="quantite" required placeholder="Ex: 150" min="1">
         </div>
 
         <button type="submit">Enregistrer sur Google Sheets</button>
@@ -99,23 +137,28 @@
 
 <script>
     document.getElementById('gaspillageForm').addEventListener('submit', function(e) {
-        e.preventDefault(); // Empêche le rechargement de la page
+        e.preventDefault();
 
-        const quantite = document.getElementById('quantite').value;
+        // Récupération de TOUTES les nouvelles variables
+        const mois = document.getElementById('mois').value;
+        const jour = document.getElementById('jour').value;
+        const categorie = document.getElementById('categorie').value;
         const type = document.getElementById('typeAliment').value;
+        const quantite = document.getElementById('quantite').value;
 
-        // ⚠️ ÉTAPE OBLIGATOIRE :https://script.google.com/macros/s/AKfycbzWOC03ph5qTC4tcYdHLvdtPV9QD4mbOH8lFmYkoAVr3mrGPkws0iH3fuI2R6QXOXcwEQ/exec
-        const urlAppsScript = "https://script.google.com/macros/s/.../exec"; 
+        //https://script.google.com/macros/s/AKfycbzkZnIPnuLd1BsexJl36jnN-xqKT_0EwLnzsqSIMikYB8bI5Jt7VbasMVeVI34WzB4SkQ/exec
 
         const donneesSaisies = {
-            gaspillage: quantite,
-            type: type
+            mois: mois,
+            jour: jour,
+            categorie: categorie,
+            type: type,
+            gaspillage: quantite
         };
 
-        // Envoi des données vers votre Google Sheets (ID: 1HqHqBs5T9AHbslxFjG0tzkEB1-HdoYR-UwDinHCywfg)
         fetch(urlAppsScript, {
             method: "POST",
-            mode: "no-cors", // Requis pour éviter les erreurs de sécurité (CORS) sur GitHub Pages
+            mode: "no-cors",
             cache: "no-cache",
             headers: {
                 "Content-Type": "application/json"
@@ -123,12 +166,12 @@
             body: JSON.stringify(donneesSaisies)
         })
         .then(() => {
-            alert("Succès ! Vos données ont été ajoutées à la feuille Google Sheets.");
-            document.getElementById('gaspillageForm').reset(); // Vide les champs du formulaire
+            alert("Succès ! Les données ont été ajoutées à votre tableau ODD.");
+            document.getElementById('gaspillageForm').reset();
         })
         .catch(error => {
-            console.error("Erreur de liaison :", error);
-            alert("Impossible d'envoyer les données. Vérifiez la configuration de votre Apps Script.");
+            console.error("Erreur :", error);
+            alert("Erreur lors de l'envoi.");
         });
     });
 </script>
