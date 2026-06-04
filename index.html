@@ -81,7 +81,6 @@
             outline: none;
         }
 
-        /* Zone d'info dynamique pour l'enfant */
         .eco-tip {
             background-color: #fef9e7;
             border-left: 5px solid var(--accent);
@@ -119,7 +118,6 @@
             background-color: #2ebd74;
         }
 
-        /* Pop-up de félicitations animé */
         .modal-success {
             display: none;
             position: fixed;
@@ -233,11 +231,10 @@
     <div class="badge-icon">🏅</div>
     <h3>Bravo, Super Héros !</h3>
     <p id="successMessage">Tu as enregistré tes données. Grâce à toi, on comprend mieux comment protéger la nature !</p>
-    <button onclick="fermerModal()" style="background-color: var(--accent); box-shadow: 0 4px 0px #d4ac0d;">Continuer la mission</button>
+    <button type="button" onclick="fermerModal()" style="background-color: var(--accent); box-shadow: 0 4px 0px #d4ac0d;">Continuer la mission</button>
 </div>
 
 <script>
-    // Liste des petits messages explicatifs pour les enfants
     const astuces = {
         "Viande rouge": "Produire de la viande rouge demande énormément d'eau et d'énergie à notre planète !",
         "Viande blanche": "Élever des animaux demande de la nourriture et de l'espace. Ne gâchons pas cet effort !",
@@ -262,8 +259,7 @@
         const type = document.getElementById('typeAliment').value;
         const quantite = document.getElementById('quantite').value;
 
-        // ⚠️ https://script.google.com/macros/s/AKfycbzkZnIPnuLd1BsexJl36jnN-xqKT_0EwLnzsqSIMikYB8bI5Jt7VbasMVeVI34WzB4SkQ/exec
-
+        // ⚠️https://script.google.com/macros/s/AKfycbzkZnIPnuLd1BsexJl36jnN-xqKT_0EwLnzsqSIMikYB8bI5Jt7VbasMVeVI34WzB4SkQ/exec
         const donneesSaisies = {
             mois: mois,
             jour: jour,
@@ -280,7 +276,6 @@
             body: JSON.stringify(donneesSaisies)
         })
         .then(() => {
-            // Affiche la pop-up ludique de succès
             document.getElementById('overlay').style.display = 'block';
             document.getElementById('successModal').style.display = 'block';
             document.getElementById('gaspillageForm').reset();
@@ -297,7 +292,6 @@
         document.getElementById('successModal').style.display = 'none';
     }
     
-    // Initialise le premier message au chargement
     mettreAJourAstuce();
 </script>
 
